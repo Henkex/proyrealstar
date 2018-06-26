@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{%  block breadcrumb %}
+     <ol class="breadcrumb">
+        <li ><a href="{%  url 'almacen:index' %}">Inicio</a></li>
+        <li class="active"><a href="{%   url 'usuarios:index' %}">Configuración</a></li>
+        <li >Listar Trabajadores</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class=" contenedor-lista">
+        <div class="panel  panel-primary">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="">LISTADO DE TRABAJADORES</span>
+                <a class ="pull-right btn btn-success  "
+                   href="{% url 'usuarios:add_trabajador' %}">Añadir Nuevo trabajador
+                </a>
+                <a class ="pull-right btn btn-danger  "
+                   href="{% url 'usuarios:index' %}">Volver
+                </a>
+            </div>
+            <div class="panel-body">
+                <div  class="table-responsive">
+                    <table id="datatable-responsive" class="table table-striped ">
+                        {% load static from staticfiles %}
+                        <thead>
+                        <tr  align="center">
+                            <th width="5%">DNI</th>
+                            <th width="30%">NOMBRES</th>
+                            <th width="30%">APELLIDOS</th>
+                            <th width="8%">TELEFONO</th>
+                            <th width="27%">ACCIONES</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for trabajador in object_list %}
+                                <tr valign="middle" class="{{forloop.counter|divisibleby:2|yesno:'even,odd'}}">
+                                    <td align="center">{{ trabajador.dni }}</td>
+                                    <td align="center">{{trabajador.first_name}}</td>
+                                    <td align="center">{{trabajador.last_name}}</td>
+                                    <td align="center">{{trabajador.cellphone}}</td>
+                                    <td align="center">
+                                        <a href="{% url 'usuarios:trabajador_detail' trabajador.id %}"
+                                           class="btn btn-info">Editar</a>
+                                        <a href="{% url 'usuarios:trabajador_delete' trabajador.id %}"
+                                           data-toggle="modal" data-target="#delete-modal"
+                                           class="btn btn-danger btn-delete">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+     </div>
+
+{#        <a class="col-sm-offset-0 col-xs-offset-4 backbutton" href="{% url 'usuarios:index' %}">#}
+{#            <span class="  glyphicon glyphicon-chevron-left" aria-hidden="true"></span>#}
+{#        </a>#}
+
+        <div class="modal fade" id="delete-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

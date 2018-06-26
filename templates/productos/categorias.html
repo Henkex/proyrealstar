@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+
+{%  block breadcrumb %}
+     <ol class="breadcrumb">
+        <li ><a href="{%  url 'almacen:index' %}">Inicio</a></li>
+        <li class="active"><a href="{%   url 'productos:index' %}">Productos</a></li>
+        <li >Agregar categorias</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container">
+        <div class="row">
+
+            <div class="panel form-panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="">AGREGAR NUEVA CATEGORIA</span>
+                </div>
+                <div class="panel-body">
+{#                    <h3 class="text-left">Agregar categoria</h3>#}
+                        <form enctype="multipart/form-data" method="post">
+                            <div id="form">
+                                {% csrf_token %}
+                                    <div class="panel-body">
+                                        <div class="input-group">
+                                                <span class="input-group-addon glyphicon glyphicon-tag " ></span>
+                                                {{form.nombre}}
+                                            </div>
+
+                                    </div>
+                                    <div class="submit-row-cat col-xs-12">
+                                        {% if editar %}
+                                            <input  class ="col-sm-offset-3 col-sm-3 col-xs-6 btn btn-success btn-lg" type="submit" value="Guardar" />
+                                        {% else %}
+                                            <input  class ="col-sm-offset-3 col-sm-3 col-xs-6 btn btn-success btn-lg" type="submit" value="Registrar" />
+                                        {% endif %}
+                                        <a class ="col-sm-offset-1 col-sm-2  col-xs-6 btn btn-danger btn-lg"  href="{% url 'productos:index' %}">
+
+                                            Volver
+
+                                        </a>
+                                    </div>
+                            </div>
+                        </form>
+                    <div class="panel-body">
+                    <div class="table-responsive">
+                    <table class="table table-striped ">
+                        {% load static from staticfiles %}
+                        <thead>
+                            <tr  align="center">
+                                <td width="10%">Código</td>
+                                <td width="60%">Categorias</td>
+                                <td width="30%">Opciones</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in categoria %}
+                            <tr valign="middle" class="{{forloop.counter|divisibleby:2|yesno:'even,odd'}}">
+                                <td align="center">{{ item.pk }}</td>
+                                <td align="center">{{ item.nombre }}</td>
+                                <td align="center">
+                                    <a href="{% url 'productos:Editar_Categoria' item.id %}"
+                                       class="btn btn-info btn-delete">
+                                        Editar
+                                    </a>
+                                    <a href="{% url 'productos:Eliminar_Categoria' item.id %}"  data-toggle="modal"
+                                       data-target="#delete-modal" class="btn btn-danger btn-delete">
+                                        Eliminar
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="delete-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

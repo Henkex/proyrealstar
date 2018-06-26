@@ -1,0 +1,17 @@
+dj-database-url==0.5.0
+dj-static==0.0.6
+Django==2.0.6
+django-bootstrap3==10.0.1
+django-toolbelt==0.0.1
+get==1.0.3
+gunicorn==19.8.1
+Pillow==5.1.0
+post==1.0.2
+psycopg2==2.7.5
+public==1.0.3
+python-dateutil==2.7.3
+pytz==2018.4
+query-string==1.0.2
+request==1.0.2
+six==1.11.0
+static3==0.7.0

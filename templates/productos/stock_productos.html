@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+{%  block breadcrumb %}
+     <ol class="breadcrumb">
+        <li ><a href="{%  url 'almacen:index' %}">Inicio</a></li>
+        <li class="active"><a href="{%   url 'productos:index' %}">Productos</a></li>
+        <li >Listar Productos</li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class=" contenedor-lista">
+        <div class="panel  panel-primary">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="">STOCK DE PRODUCTOS</span>
+                <a class ="pull-right btn btn-danger  "
+                   href="{% url 'productos:index' %}">Volver
+                </a>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table id="datatable-responsive" class="table table-striped ">
+                        {% load static from staticfiles %}
+                        <thead>
+                            <tr  align="center">
+                                <th width="15%">Stock</th>
+                                <th width="30%">Descripción</th>
+                                <th width="20%">Categoría</th>
+                                <th width="30%">Almacén</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for producto in object_list %}
+                            <tr valign="middle" class="{{forloop.counter|divisibleby:2|yesno:'even,odd'}}">
+                                <td align="center">{{ producto.stock }}</td>
+                                <td align="center">{{ producto.producto }}</td>
+                                <td align="center">{{ producto.producto.categoria }}</td>
+                                <td align="center">{{ producto.id_almacen }}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="delete-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    {% load static from staticfiles %}
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'DataTables-1.10.7/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+    <link href="{% static 'DataTables-1.10.7/extensions/Responsive/css/dataTables.responsive.css' %}" rel="stylesheet">
+{#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">#}
+    <link href="{% static 'css/chosen.css' %}" rel="stylesheet">
+    <link href="{% static 'css/estilos.css' %}" rel="stylesheet">
+
+{#    <link href="{% static "css/bootstrap.icon-large.min.css" %}" rel="stylesheet">#}
+    <title>Sistema web Almacén</title>
+</head>
+<body>
+    <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+         <div class="container-fluid contenedor ">
+             <div class="navbar-header">
+                 <button type="button" class="navbar-toggle " data-toggle="collapse"
+                        data-target=".navbar-ex1-collapse">
+                     <span class="sr-only">Desplegar navegacion</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                 </button>
+                 <a href="/" class="navbar-brand">
+                      <img class=" navbar-logo" src="{% static 'img/logo.png' %}" alt="">
+                 </a>
+             </div>
+            <!-- <p class=" navbar-text pull-right  hidden-sm hidden-xs logged"><a href="#" class="navbar-link">Alonso</a></p> -->
+             <div class="navbar-collapse collapse hola navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Bienvenido
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <strong>{{ user.username }}</strong>
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="logout" role="menu">
+                            <li ><a href="/logout">Cerrar Sesión</a></li>
+                            </ul>
+                    </li>
+                </ul>
+            </div>
+         </div>
+    </div>
+
+    {% block breadcrumb %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <p class="text-center">(2018) Multiservicios el Rayo S.A.C.</p>
+            </div>
+        </div>
+    </footer>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script-!-->
+    <script charset="utf8" src="{% static 'DataTables-1.10.7/media/js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script charset="utf8" src="{% static 'DataTables-1.10.7/media/js/jquery.dataTables.js' %}"></script>
+    <script charset="utf8" src="{% static 'DataTables-1.10.7/extensions/Responsive/js/dataTables.responsive.js' %}"></script>
+
+{#    <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>#}
+    <script src="{% static 'js/chosen.jquery.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.min.js' %}"></script>
+    <script src="{% static 'js/jquery.battatech.excelexport.min.js' %}"></script>
+    <script src="{% static 'js/funciones.js'%}"></script>
+</html>
